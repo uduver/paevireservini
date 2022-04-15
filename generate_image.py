@@ -33,8 +33,8 @@ def add_text_to_image(image: Image, days_left: str):
 
     return image
 
-def create_image(days_left: int):
-    background_image = create_background_image("resources/backgrounds/2022-04-13.jpg")
+def create_image(days_left: int, background_path: str):
+    background_image = create_background_image(background_path)
     instagram_post = add_progress_bar(background_image, days_left)
     instagram_post = add_text_to_image(instagram_post, days_left)
 
@@ -60,6 +60,6 @@ def add_progress_bar(image, days_left):
     draw = ImageDraw.Draw(image)
     # draw the progress bar to given location, width, progress and color
     draw = draw_progress_bar(draw, 100, 880, 780, 100, (335-days_left)/335)
+    print((335-days_left)/335)
     return image
 
-create_image(65).show()
