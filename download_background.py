@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 import requests
 
-def download_image(url: str, output_path: str) -> bool:
+def download_image(output_path: str) -> bool:
     """Downloads the image from the url and saves it to the file_name.
 
     Args:
@@ -16,9 +16,10 @@ def download_image(url: str, output_path: str) -> bool:
         bool: True if the image was downloaded successfully, False otherwise.
     """
     try:
-        urllib.request.urlretrieve(url, output_path)
-        return True
+        url: str = get_random_image_url(date.today())
+        return urllib.request.urlretrieve(url, output_path)
     except:
+        print("The image could not be downloaded.")
         return False
 
 def get_random_image_url(date: date) -> str:
@@ -45,7 +46,12 @@ def get_image_urls(date: date) -> list:
         "a", {"class": "page-link"})[-1]).split("\"")[3]
 
     print("https://pildid.mil.ee/" + link_to_last_page)
-    images_page = requests.get("https://pildid.mil.ee/" + link_to_last_page)
+
+    image_count = int(link_to_last_page.split("/")[-1].split("#")[0][6:])
+    
+    # Get the images from page before the.
+    images_page = requests.get(
+        "https://pildid.mil.ee/" + link_to_last_page.replace(str(image_count), str(image_count-12)))
     images_soup = BeautifulSoup(images_page.text, 'html.parser')
 
     thumbnails = images_soup.find("div", {"id": "thumbnails"})
