@@ -25,8 +25,10 @@ def add_text_to_image(image: Image, days_left: str):
     font_text = ImageFont.truetype(
         "resources/fonts/Poppins-Bold.ttf", size=48)
     
+    print(f"{round(((335-days_left)/335)*100, 1)}%")
     # Draw percentage text
-    draw.text((1080/2, 930), f"{round(((335-days_left)/335)*100, 2)}%", (255, 255, 255), font=font_text, anchor="mm")
+    draw.text((1080/2, 930), f"{round(((335-days_left)*100/335), 1)}%",
+              (255, 255, 255), font=font_text, anchor="mm")
 
     # Draw days left text
     draw.text((1080/2, 1080/2), f"{days_left}", (255, 255, 255), font=font_header, anchor="mm")
@@ -60,6 +62,5 @@ def add_progress_bar(image, days_left):
     draw = ImageDraw.Draw(image)
     # draw the progress bar to given location, width, progress and color
     draw = draw_progress_bar(draw, 100, 880, 780, 100, (335-days_left)/335)
-    print((335-days_left)/335)
     return image
 
