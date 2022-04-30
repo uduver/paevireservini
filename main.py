@@ -7,6 +7,12 @@ def main():
     days_left: int = (date(2022, 6, 19) - date.today()).days
 
     background_path: str = f"resources/backgrounds/{date.today()}.jpg"
+    # When the background download fails use a backup image.
+    try:
+        download_background.download_image(background_path)
+    except print(0):
+        background_path: str = f"resources/backgrounds/backup.jpg"
+
     download_background.download_image(background_path)
     instagram_post_image = generate_image.create_image(days_left, background_path)
     instagram_post_image.save(f"output/{date.today()}.jpg", "JPEG", quality=100)
@@ -26,7 +32,7 @@ def main():
 
 while True:
     # Stupid way to make sure the program runs every day.
-    if datetime.now().hour == 4 and datetime.now().minute == 20:
+    if datetime.now().hour == 0 and datetime.now().minute == 25:
         main()
         time.sleep(60)
 
