@@ -4,7 +4,7 @@ import time
 import os
 
 def main():
-    days_left: int = (date(2022, 6, 19) - date.today()).days
+    days_left: int = (date(2022, 6, 17) - date.today()).days
 
     background_path: str = f"resources/backgrounds/{date.today()}.jpg"
     # When the background download fails use a backup image.
