@@ -20,7 +20,7 @@ def download_image(output_path: str) -> bool:
         return urllib.request.urlretrieve(url, output_path)
     except:
         print("The image could not be downloaded.")
-        return False
+        raise
 
 def get_random_image_url(date: date) -> str:
     """Gets a random image URL from pildid.mil.ee.

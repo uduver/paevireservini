@@ -14,7 +14,6 @@ def main():
     except:
         background_path: str = f"resources/backgrounds/backup.jpg"
 
-    download_background.download_image(background_path)
     instagram_post_image = generate_image.create_image(
         days_left, background_path)
     instagram_post_image.save(
