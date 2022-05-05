@@ -5,7 +5,6 @@ import requests
 
 class Instagram:
     def __init__(self, access_token, client_id, client_secret, instagram_page_id):
-        print(access_token, client_id, client_secret, instagram_page_id)
         self.client_id = client_id
         self.client_secret = client_secret
         self.instagram_page_id = instagram_page_id
@@ -14,7 +13,6 @@ class Instagram:
 
 
     def get_long_lived_token(self):
-        print(self.client_id, self.client_secret, self.access_token)
         request = requests.get("https://graph.facebook.com/v13.0/oauth/access_token?grant_type=fb_exchange_token&client_id={}&client_secret={}&fb_exchange_token={}".format(self.client_id, self.client_secret, self.access_token))
 
         return request.json()['access_token']
